@@ -1,0 +1,30 @@
+{
+  "name": "computing2",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "prebuild": "gitbook install",
+    "build": "gitbook build",
+    "prestart": "gitbook install",
+    "start": "gitbook serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/likr-lecture/computing2.git"
+  },
+  "author": "Yosuke Onoue <onoue@likr-lab.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/likr-lecture/computing2/issues"
+  },
+  "homepage": "https://github.com/likr-lecture/computing2#readme",
+  "devDependencies": {
+    "gitbook-cli": "^2.3.2",
+    "prettier": "^2.0.5"
+  },
+  "dependencies": {
+    "gitbook-plugin-ace": "^0.3.2",
+    "gitbook-plugin-mathjax": "^1.1.2",
+    "mathjax": "^2.7.8"
+  }
+}
