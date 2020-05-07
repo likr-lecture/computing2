@@ -1,5 +1,5 @@
 {
   "language": "ja",
-  "plugins": ["ace", "hide-published-with", "mathjax"],
+  "plugins": ["ace", "mathjax"],
   "pluginsConfig": {}
 }
