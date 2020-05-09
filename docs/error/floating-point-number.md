@@ -26,7 +26,7 @@ $$v$$ と $$e$$、$$f$$ の関係は以下のようになります。
 $$
 \begin{aligned}
 v &= (-1)^s c 2^q \\
-c &= 1 + f \qquad (1 \geq f) \\
+c &= 1 + f \times 2^{-23}\\
 q &= e - 127
 \end{aligned}
 $$
