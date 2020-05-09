@@ -2,7 +2,13 @@
 
 **担当教員：** 尾上洋介< onoue.yousuke@nihon-u.ac.jp >
 
+## この資料について
+
 本資料は日本大学文理学部情報科学科の「コンピューティング 2」の授業資料です。
+
+本資料はライセンスに従い当授業以外でも自由に利用いただけます。
+
+誤りやお気づきの点などがあれば [GitHub リポジトリ](https://github.com/likr-lecture/computing2/issues) からご報告ください。
 
 ## 受講にあたって
 
@@ -21,3 +27,7 @@
   - 40 点満点のレポート課題を 3 回出題します。
   - 3 回のうち、点数の良い 2 回分の合計点をレポート点とします。
     - 3 回の得点をそれぞれ $$p1, p2, p3$$ としたとき、レポート点は $$p1 + p2 + p3 - \min(p1, p2, p3)$$ となります。
+
+# ライセンス
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />この 作品 は <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">クリエイティブ・コモンズ 表示 4.0 国際 ライセンス</a>の下に提供されています。

@@ -13,11 +13,11 @@
     "url": "git+https://github.com/likr-lecture/computing2.git"
   },
   "author": "Yosuke Onoue <onoue@likr-lab.com>",
-  "license": "MIT",
+  "license": "CC-BY-4.0",
   "bugs": {
     "url": "https://github.com/likr-lecture/computing2/issues"
   },
-  "homepage": "https://github.com/likr-lecture/computing2#readme",
+  "homepage": "https://computing2.vdslab.jp/",
   "devDependencies": {
     "gitbook-cli": "^2.3.2",
     "prettier": "^2.0.5"
