@@ -7,7 +7,7 @@ Runge-Kutta 法の導出や数理的な性質については次回に回しま�
 
 $$
 \begin{aligned}
-x(t_1 + h) &= x(t_1) + h \frac{f_1 + f_2 + f_3 + f_4}{6} \\
+x(t_1 + h) &= x(t_1) + h \frac{f_1 + 2 f_2 + 2 f_3 + f_4}{6} \\
 f_1 &= f \left(t_1, x(t_1) \right) \\
 f_2 &= f \left(t_1 + \frac{h}{2}, x(t_1) + \frac{h}{2} f_1 \right) \\
 f_3 &= f \left(t_1 + \frac{h}{2}, x(t_1) + \frac{h}{2} f_2 \right) \\
