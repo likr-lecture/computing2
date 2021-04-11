@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "prebuild": "gitbook install",
-    "build": "gitbook build",
-    "prestart": "gitbook install",
-    "start": "gitbook serve"
+    "build": "honkit build",
+    "start": "honkit serve"
   },
   "repository": {
     "type": "git",
@@ -19,8 +17,8 @@
   },
   "homepage": "https://computing2.vdslab.jp/",
   "devDependencies": {
-    "gitbook-cli": "^2.3.2",
-    "prettier": "^2.0.5"
+    "honkit": "^3.6.19",
+    "prettier": "^2.2.1"
   },
   "dependencies": {
     "gitbook-plugin-ace": "^0.3.2",
