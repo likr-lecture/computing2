@@ -10,7 +10,7 @@
   - [二分法](./docs/sqrt/binary-search.md)
   - [ニュートン法](./docs/sqrt/newton-method.md)
   - [まとめ](./docs/sqrt/summary.md)
-  - [演習](./docs/sqrt/excercise.md)
+  - [演習](./docs/sqrt/exercise.md)
   - [演習の解答例](./docs/sqrt/answer.md)
 - 2\. 浮動小数点数と近似・誤差
   - [2 進数による小数の表現](./docs/error/binary-representation.md)
@@ -18,7 +18,7 @@
   - [誤差](./docs/error/error.md)
   - [10 進固定小数点数](./docs/error/fixed-point-number.md)
   - [まとめ](./docs/error/summary.md)
-  - [演習](./docs/error/excercise.md)
+  - [演習](./docs/error/exercise.md)
   - [演習の解答例](./docs/error/answer.md)
 - 3\. 常微分方程式の初期値問題の数値解法
   - [常微分方程式の初期値問題](./docs/differential-equation/differential-equations.md)
@@ -27,7 +27,7 @@
   - [微分方程式とアニメーションの描画](./docs/differential-equation/animation.md)
   - [流れ場と流線](./docs/differential-equation/vector-field.md)
   - [まとめ](./docs/differential-equation/summary.md)
-  - [演習](./docs/differential-equation/excercise.md)
+  - [演習](./docs/differential-equation/exercise.md)
   - [演習の解答例](./docs/differential-equation/answer.md)
 - 4\. 擬似乱数とモンテカルロシミュレーション
   - [擬似乱数](./docs/random/pseudo-random.md)
@@ -36,7 +36,7 @@
   - [確率変数と確率分布](./docs/random/random-distribution.md)
   - [ランダムウォーク](./docs/random/random-walk.md)
   - [まとめ](./docs/random/summary.md)
-  - [演習](./docs/random/excercise.md)
+  - [演習](./docs/random/exercise.md)
   - [演習の解答例](./docs/random/answer.md)
 - 5\. 運動のシミュレーションとネットワーク可視化
   - [速度 Verlet 法](./docs/network/velocity-verlet.md)
@@ -46,7 +46,7 @@
   - [グラフ描画](./docs/network/graph-drawing.md)
   - [Barnes-Hut アルゴリズム](./docs/network/barnes-hut.md)
   - [まとめ](./docs/network/summary.md)
-  - [演習](./docs/network/excercise.md)
+  - [演習](./docs/network/exercise.md)
   - [演習の解答例](./docs/network/answer.md)
 - [6. おわりに](./docs/summary.md)
 

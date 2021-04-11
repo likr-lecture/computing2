@@ -2,52 +2,30 @@
 
 ## 演習 1
 
-```java
-float e = 0.0001;
-float n = 2;
-float x = 0;
-
-while ((x + e) * (x + e) < n) {
-  x += e;
-}
-
-println("x = " + x);
-```
+<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js" data-user="likr" data-slug-hash="eYgyqmj" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 演習1-1 解答例">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/eYgyqmj">
+  コンピューティング2 演習1-1 解答例</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 ## 演習 2
 
-```java
-float e = 0.0001;
-float n = 2;
-float x0 = 1;
-float x1 = 2;
-float x;
-
-do {
-  x = (x0 + x1) / 2;
-  if (x * x > n) {
-    x1 = x;
-  } else {
-    x0 = x;
-  }
-} while (x1 - x0 > e);
-
-println("x = " + x);
-```
+<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js" data-user="likr" data-slug-hash="zYNpgBe" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 演習1-2 解答例">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/zYNpgBe">
+  コンピューティング2 演習1-2 解答例</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 ## 演習 3
 
-```java
-float e = 0.0001;
-float n = 2;
-float x = n;
-
-while (n < (x - e) * (x - e)) {
-  x = (x * x + n) / (2 * x);
-}
-
-println("x = " + x);
-```
+<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js" data-user="likr" data-slug-hash="qBRpeae" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 演習1-3 解答例">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/qBRpeae">
+  コンピューティング2 演習1-3 解答例</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 ## 演習 4
 
