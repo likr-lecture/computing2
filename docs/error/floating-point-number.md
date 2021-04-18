@@ -52,25 +52,23 @@ IEEE 754 では、これらの特殊な数を以下のように表現するこ�
 
 負の無限大 $$-\infty$$ や -0.0 は$$\infty$$ と 0.0 の符号部をそれぞれマイナスにすることによって表現します。
 
-## Processing による確認
+## JavaScript による確認
 
-Processing（Java）では、`Float.floatToIntBits(v)` によって、`v` を二進数表現でしたときのビット列を整数型の値として得ることができます。
+JavaScript では、ArrayBuffer と DataView によって、同一ビット列を Float32 や Uint32 等の異なる数値型として解釈することができます。
+これを用いて、0.75 がビット列としてどのように表現されるか確認してみましょう。
 
-```java
-float v = 0.75;
-int bits = Float.floatToIntBits(v);
-
-int s = bits < 0 ? 1 : 0;
-int e = (bits & 0x7f800000) >> 23;
-int f = bits & 0x007fffff;
-
-println(s, hex(e), hex(f));
+```javascript
+const buffer = new ArrayBuffer(4);
+const view = new DataView(buffer);
+view.setFloat32(0, 0.75);
+const bits = view.getUint32(0);
+console.log(bits.toString(2).padStart(32, "0"));
 ```
 
 実行結果は以下のようになります。
 
 ```console
-0 0000007E 00400000
+00111111010000000000000000000000
 ```
 
 IEEE 754 の形式と一致していることが確認できます。

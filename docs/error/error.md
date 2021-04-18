@@ -6,42 +6,34 @@
 
 以下のプログラムを実行してみましょう。
 
-```java
-void setup() {
-  noLoop();
+```javascript
+function printBits(v) {
+  const buffer = new ArrayBuffer(4);
+  const view = new DataView(buffer);
+  view.setFloat32(0, v);
+  const bits = view.getUint32(0);
+  console.log(bits.toString(2).padStart(32, "0"), view.getFloat32(0));
 }
 
-void draw() {
-  float a = 12345.7;
-  float b = 12345.6;
-  printBits(a);
-  printBits(b);
-  printBits(a - b);
+const a = 12345.6;
+const b = 12345.7;
+printBits(a);
+printBits(b);
+printBits(a - b);
 
-  float c = 0.6;
-  printBits(c);
-  printBits(a - c);
-}
-
-void printBits(float v) {
-  int bits = Float.floatToIntBits(v);
-
-  int s = bits < 0 ? 1 : 0;
-  int e = (bits & 0x7f800000) >> 23;
-  int f = bits & 0x007fffff;
-
-  println(s, hex(e), hex(f), v);
-}
+const c = 0.6;
+printBits(c);
+printBits(a - c);
 ```
 
 実行結果は以下のようになります。
 
 ```console
-0 0000008C 0040E6CD 12345.7
-0 0000008C 0040E666 12345.6
-0 0000007B 004E0000 0.10058594
-0 0000007E 0019999A 0.6
-0 0000008C 0040E467 12345.101
+01000110010000001110011011001101 12345.7
+01000110010000001110011001100110 12345.6
+00111101110011001100110011001101 0.1000000000003638
+00111111000110011001100110011010 0.6
+01000110010000001110010001100110 12345.1
 ```
 
 a - c では指数部の値が保たれているのに対して、a - b のときは指数部の値が小さくなり、有効桁数が減っていることが確認できます。
@@ -53,19 +45,19 @@ a - c では指数部の値が保たれているのに対して、a - b のと�
 
 以下のプログラムを実行してみましょう。
 
-```java
-float a = 1e10;
-float b = 1e5;
-float c = 1e1;
-println("a + b = " + (a + b));
-println("a + c = " + (a + c));
+```javascript
+const a = 1e20;
+const b = 1e10;
+const c = 1e1;
+console.log(`a + b = ${a + b}`);
+console.log(`a + c = ${a + c}`);
 ```
 
 実行結果は以下の通りになります。
 
 ```console
-a + b = 1.00001004E10
-a + c = 1.0E10
+a + b = 100000000010000000000
+a + c = 100000000000000000000
 ```
 
 a + c では絶対値の小さい c の値が加算に反映されていません。

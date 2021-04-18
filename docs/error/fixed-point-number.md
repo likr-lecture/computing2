@@ -7,29 +7,27 @@
 以下は 1.0 - 0.9 を計算するプログラムです。
 
 ```java
-float a = 1.0;
-float b = 0.9;
-println("a - b = " + (a - b));
+const a = 1.0;
+const b = 0.9;
+console.log(`a - b = ${a - b}`);
 ```
 
 実行結果は以下のように誤差を生じます。
 
 ```console
-a - b = 0.100000024
+a - b = 0.09999999999999998
 ```
 
 コンピュータで、誤差が出ないように小数を扱うことはできるのでしょうか？
-コンピュータのプロセッサが採用している浮動小数点数を使うのではなく、実数の計算の仕組みをプログラム上で実現することでそれは可能です。
-Processing では、10 進固定小数点数を表す Java の `BigDecimal` クラスを利用できます。
+コンピュータのプロセッサが採用している浮動小数点数を使うのではなく、10 進数の実数の計算の仕組みをプログラム上で実現することでそれは可能です。
+JavaScript では、decimal.js 等の外部ライブラリによって 10 進固定小数点数を表す `Decimal` クラスを利用できます。
 
 `BigDecimal` を用いた 1.0 - 0.9 の計算は以下のようになります。
 
-```java
-import java.math.BigDecimal;
-
-BigDecimal a = new BigDecimal("1");
-BigDecimal b = new BigDecimal("0.9");
-println("a - b = " + a.subtract(b));
+```javascript
+const a = new Decimal("1");
+const b = new Decimal("0.9");
+console.log(`a - b = ${a.minus(b)}`);
 ```
 
 実行結果は以下のようになります。
@@ -40,8 +38,8 @@ a - b = 0.1
 
 誤差のない計算結果 0.1 を得ることができました。
 
-一方で、BigDecimal にもメリット・デメリットがあります。
-`float` に対する `BigDecimal` のメリットは以下の通りです。
+一方で、Decimal にもメリット・デメリットがあります。
+`Number` に対する `Decimal` のメリットは以下の通りです。
 
 - 浮動小数点数に由来する演算誤差が生じない
 - 桁数に制限がない
@@ -49,4 +47,4 @@ a - b = 0.1
 一方で以下のデメリットがあります。
 
 - 演算が低速
-- Processing（Java）においては組み込みの演算子が使用できず、演算のためのメソッドを使う必要がある
+- JavaScript においては組み込みの演算子が使用できず、演算のためのメソッドを使う必要がある
