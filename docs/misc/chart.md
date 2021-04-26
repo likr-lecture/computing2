@@ -27,32 +27,12 @@ $$
 
 これに基づいてチャートの描画をするプログラムを作成すると以下のようになります。
 
-```java
-void setup() {
-  size(600, 600);
-}
-
-void draw() {
-  background(255);
-  float y0 = f(0);
-  for (int x = 1; x < width; ++x) {
-    float y = f(x);
-    line(x - 1, y0, x, y);
-    y0 = y;
-  }
-}
-
-float f(float x) {
-  float a = -2.0 * height / width / width;
-  float b = width / 2.0;
-  float c = height / 2.0;
-  return a * (x - b) * (x - b) + c;
-}
-```
-
-実行結果は以下の通りです。
-
-![Screen Shot 2019-05-06 at 4.47.15.png (15.9 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/05/06/28750/9eb6abb0-dbc7-4969-92aa-db4e47db6377.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="wvgNRYP" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 演習misc-1-1">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/wvgNRYP">
+  コンピューティング2 演習misc-1-1</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 $$y = x^2$$が$$-1 \leq x \leq 1$$、$$-1 \leq y \leq 1$$の範囲で正しく描画できていることが確認できます。
 
@@ -74,59 +54,87 @@ $$
 b = (b_r - b_l) \frac{a - a_l}{a_r - a_l} + b_l
 $$
 
-これを利用して、次式のように計算空間上の xLeft から xRight の範囲を、0 から width の範囲の画面空間へ座標変換することができます。
+これを利用して、次式のように計算空間上の $$x_C (\text{xLeft} \leq x_C \leq \text{xRight}$$ を画面空間上の $$x_D (0 \leq x_D \leq width)$$ へ対応付けることができます。
 
 $$
-\text{scaleX}(x) = \text{width} \frac{x - \text{xLeft}}{\text{xRight} - \text{xLeft}}
+x_D = \frac{\text{width}}{\text{xRight} - \text{xLeft}} (x_C - \text{xLeft})
 $$
 
-$$y$$についても同様に、計算空間上の yBottom から yTop の範囲を、height から 0 の範囲の画面空間へ座標変換することができます。
+$$y$$についても同様に、計算空間上の $$y_C (\text{yTop} \leq y_C \leq \text{yBottom}$$を画面空間上の $$y_D (0 \leq y_D \leq height)$$ へ対応付けることができます。
 
 $$
-\text{scaleY}(y) = -\text{height} \frac{y - \text{yBottom}}{\text{yTop} - \text{yBottom}} + \text{height}
+y_D = \frac{\text{height}}{\text{yBottom} - \text{yTop}} (y_C - \text{yTop})
 $$
 
-$$y$$については、画面空間の上下が反転しているため、yBottom には height が、yTop には width が対応することに注意しましょう。
+$$y$$については、画面空間の上下が反転しているため、yBottom には height が、yTop には 0 が対応することに注意しましょう。
+
+Processing では、 `applyMatrix` 関数を用いることで上述の座標変換を行うことができます。`applyMatrix(a, b, c, d, e, f)` は次式で表される **アフィン座標変換** を行います。
+
+$$
+\left( \begin{array}{c}
+x_D \\
+y_D \\
+1
+\end{array}\right)
+=
+\left( \begin{array}{ccc}
+a & c & e \\
+b & d & f \\
+0 & 0 & 1
+\end{array}\right)
+\left( \begin{array}{c}
+x_C \\
+y_C \\
+1
+\end{array}\right)
+$$
+
+計算空間から画面空間への座標変換は アフィン変換を用いて次のように表されます。
+
+$$
+\begin{aligned}
+\left( \begin{array}{c}
+x_D \\
+y_D \\
+1
+\end{array} \right)
+&=
+\left( \begin{array}{ccc}
+\frac{\text{width}}{\text{xRight} - \text{xLeft}} & 0 & -\frac{\text{width}}{\text{xRight} - \text{xLeft}}\text{xLeft}\\
+0 & \frac{\text{height}}{\text{yBottom} - \text{yTop}} & -\frac{\text{height}}{\text{yBottom} - \text{yTop}} \text{yTop}\\
+0 & 0 & 1
+\end{array} \right)
+\left( \begin{array}{c}
+x_C \\
+y_C \\
+1
+\end{array} \right) \\
+&=
+\left( \begin{array}{ccc}
+\frac{\text{width}}{\text{xRight} - \text{xLeft}} & 0 & 0 \\
+0 & \frac{\text{height}}{\text{yBottom} - \text{yTop}} & 0 \\
+0 & 0 & 1
+\end{array}\right)
+\left( \begin{array}{ccc}
+1 & 0 & -\text{xLeft} \\
+0 & 1 & -\text{yTop} \\
+0 & 0 & 1
+\end{array}\right)
+\left( \begin{array}{c}
+x_C \\
+y_C \\
+1
+\end{array}\right)
+\end{aligned}
+$$
+
+`applyMatrix(sx, 0, 0, sy, 0, 0)` と `applyMatrix(1, 0, 0, 1, tx, ty)` はそれぞれショートカット関数の `scale(sx, sy)` と `translate(tx, ty)` を用いることができます。
 
 座標変換を用いた二次関数の描画プログラムは以下のようになります。
 
-```java
-float xLeft = -1;
-float xRight = 1;
-float yTop = 1;
-float yBottom = -1;
-
-void setup() {
-  size(600, 600);
-}
-
-void draw() {
-  background(255);
-
-  float x0 = xLeft;
-  float y0 = f(x0);
-  float dx = (xRight - xLeft) / width;
-  for (float x = x0 + dx; x < xRight; x += dx) {
-    float y = f(x);
-    drawLine(x0, y0, x, y);
-    x0 = x;
-    y0 = y;
-  }
-}
-
-float f(float x) {
-  return x * x;
-}
-
-float scaleX(float x) {
-  return width * (x - xLeft) / (xRight - xLeft);
-}
-
-float scaleY(float y) {
-  return -height *  (y - yBottom) / (yTop - yBottom) + height;
-}
-
-void drawLine(float x0, float y0, float x1, float y1) {
-  line(scaleX(x0), scaleY(y0), scaleX(x1), scaleY(y1));
-}
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="yLgZGwQ" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 演習misc-1-2">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/yLgZGwQ">
+  コンピューティング2 演習misc-1-2</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>

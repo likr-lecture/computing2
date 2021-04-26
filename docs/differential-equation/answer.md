@@ -2,134 +2,30 @@
 
 ## 演習 1
 
-```java
-float xLeft = -PI;
-float xRight = PI;
-float yTop = 1;
-float yBottom = -1;
-
-void setup() {
-  size(800, 400);
-}
-
-void draw() {
-  background(255);
-
-  float x0 = xLeft;
-  float y0 = f(x0);
-  float dx = (xRight - xLeft) / width;
-  for (float x = x0 + dx; x < xRight; x += dx) {
-    float y = f(x);
-    drawLine(x0, y0, x, y);
-    x0 = x;
-    y0 = y;
-  }
-}
-
-float f(float x) {
-  return sin(x);
-}
-
-float scaleX(float x) {
-  return width * (x - xLeft) / (xRight - xLeft);
-}
-
-float scaleY(float y) {
-  return -height * (y - yBottom) / (yTop - yBottom) + height;
-}
-
-void drawLine(float x0, float y0, float x1, float y1) {
-  line(scaleX(x0), scaleY(y0), scaleX(x1), scaleY(y1));
-}
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="eYgxbVQ" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 演習3-1">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/eYgxbVQ">
+  コンピューティング2 演習3-1</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 ## 演習 2
 
-```java
-float xLeft = -1;
-float xRight = 1;
-float yTop = 1;
-float yBottom = -1;
-
-void setup() {
-  size(600, 600);
-}
-
-void draw() {
-  background(255);
-  for (float a = -1; a < 1; a += 0.1) {
-    float x0 = xLeft;
-    float y0 = f(x0, a);
-    float dx = (xRight - xLeft) / width;
-    for (float x = x0 + dx; x < xRight; x += dx) {
-      float y = f(x, a);
-      drawLine(x0, y0, x, y);
-      x0 = x;
-      y0 = y;
-    }
-  }
-}
-
-float f(float x, float a) {
-  return a * exp(-x);
-}
-
-float scaleX(float x) {
-  return width * (x - xLeft) / (xRight - xLeft);
-}
-
-float scaleY(float y) {
-  return -height * (y - yBottom) / (yTop - yBottom) + height;
-}
-
-void drawLine(float x0, float y0, float x1, float y1) {
-  line(scaleX(x0), scaleY(y0), scaleX(x1), scaleY(y1));
-}
-
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="mdRvYpX" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 演習3-2">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/mdRvYpX">
+  コンピューティング2 演習3-2</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 ## 演習 3
 
-```java
-float xLeft = 0;
-float xRight = 1;
-float yTop = 5;
-float yBottom = 0;
-
-void setup() {
-  size(600, 600);
-}
-
-void draw() {
-  background(255);
-
-  float x0 = 1;
-  float t0 = 0;
-  float tTarget = 1;
-  float dt = (tTarget - t0) / 1000;
-  for (float t = t0 + dt; t < tTarget; t += dt) {
-    float x = x0 + dt * dx(t, x0);
-    drawLine(t - dt, x0, t, x);
-    x0 = x;
-  }
-}
-
-float dx(float t, float x) {
-  return x;
-}
-
-float scaleX(float x) {
-  return width * (x - xLeft) / (xRight - xLeft);
-}
-
-float scaleY(float y) {
-  return height * (1 - (y - yBottom) / (yTop - yBottom));
-}
-
-void drawLine(float x0, float y0, float x1, float y1) {
-  line(scaleX(x0), scaleY(y0), scaleX(x1), scaleY(y1));
-}
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="eYgxwzg" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 演習3-3">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/eYgxwzg">
+  コンピューティング2 演習3-3</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 ## 演習 4
 

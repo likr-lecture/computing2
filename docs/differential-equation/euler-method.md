@@ -39,83 +39,49 @@ $$
 
 以下のプログラムでは、Euler 法によって得られた近似解と解析解をコンソールに表示しています。
 
-```java
-void setup() {
-  background(255);
+```javascript
+function setup() {
   noLoop();
 }
 
-void draw() {
-  float x0 = 1;
-  float t0 = 0;
-  float tTarget = 1;
-  float dt = (tTarget - t0) / 1000;
-  for (float t = t0 + dt; t < tTarget; t += dt) {
-    float x = x0 + dt * dx(t, x0);
-    x0 = x;
+function draw() {
+  const steps = 1000;
+  const t0 = 0;
+  const tTarget = 1;
+  const h = (tTarget - t0) / steps;
+
+  let t1 = t0;
+  let x1 = 1;
+  for (let i = 0; i < steps; i += 1) {
+    const t2 = t1 + h;
+    const x2 = x1 + h * dx(t1, x1);
+    t1 = t2;
+    x1 = x2;
   }
-  println(x0);
-  println(exp(-1));
+  console.log(x1);
+  console.log(exp(-1));
 }
 
-float dx(float t, float x) {
-  return -x;
+function dx(t, xt) {
+  return -xt;
 }
 ```
 
 実行結果は以下のようになります。
 
 ```console
-0.36769542
-0.36787945
+0.36769542477096373
+0.36787944117144233
 ```
 
-さらにこれを改変して、$$x(t)$$のグラフを$$0 \leq t \leq 1$$、$$0 \leq x \leq 1$$の範囲で幅 600、高さ 600 のウィンドウに描画するプログラムは以下のようになります。
+さらにこれを改変して、$$x(t)$$のグラフを$$0 \leq t \leq 1$$、$$0 \leq x \leq 1$$の範囲で幅 300、高さ 300 のウィンドウに描画するプログラムと実行結果は以下のようになります。
 
-```java
-float xLeft = 0;
-float xRight = 1;
-float yTop = 1;
-float yBottom = 0;
-
-void setup() {
-  size(600, 600);
-}
-
-void draw() {
-  background(255);
-
-  float x0 = 1;
-  float t0 = 0;
-  float tTarget = 1;
-  float dt = (tTarget - t0) / 1000;
-  for (float t = t0 + dt; t < tTarget; t += dt) {
-    float x = x0 + dt * dx(t, x0);
-    drawLine(t - dt, x0, t, x);
-    x0 = x;
-  }
-}
-
-float dx(float t, float x) {
-  return -x;
-}
-
-float scaleX(float x) {
-  return width * (x - xLeft) / (xRight - xLeft);
-}
-
-float scaleY(float y) {
-  return height * (1 - (y - yBottom) / (yTop - yBottom));
-}
-
-void drawLine(float x0, float y0, float x1, float y1) {
-  line(scaleX(x0), scaleY(y0), scaleX(x1), scaleY(y1));
-}
-```
-
-実行結果は以下の通りです。
-
-![Screen Shot 2019-05-06 at 7.12.19.png (15.0 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/05/06/28750/4c3cc622-1b41-44bb-ad6f-2eb70706a2ed.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="jOydozo" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2  3-1-1">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/jOydozo">
+  コンピューティング2  3-1-1</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 # 連立微分方程式への Euler 法の適用
 
@@ -153,53 +119,60 @@ $$
 
 を Euler 法によって解き、各時点の $$x(t), y(t)$$ の値をコンソールに表示するプログラムは以下のようになります。
 
-```java
-void setup() {
-  background(255);
+```javascript
+function setup() {
   noLoop();
 }
 
-void draw() {
-  int d = 2;
-  float[] x0 = {1, 0};
-  float[] x = new float[2];
-  float[] dxt = new float[2];
+function draw() {
+  const steps = 300;
+  const t0 = xLeft;
+  const tTarget = xRight;
+  const h = (tTarget - t0) / steps;
 
-  float t0 = 0;
-  float tTarget = 2 * PI;
-  float dt = (tTarget - t0) / 100;
+  let t1 = t0;
+  const x1 = [1, 0];
+  const d = x1.length;
+  const x2 = new Array(d);
+  const dx1 = new Array(d);
 
-  for (float t = t0 + dt; t < tTarget; t += dt) {
-    dx(x0, dxt);
-    for (int i = 0; i < d; ++i) {
-      x[i] = x0[i] + dt * dxt[i];
-      x0[i] = x[i];
+  for (let i = 0; i < steps; i += 1) {
+    const t2 = t1 + h;
+    dx(t1, x1, dx1);
+    for (let i = 0; i < d; ++i) {
+      x2[i] = x1[i] + h * dx1[i];
     }
-    println(x0[0], x0[1]);
+
+    console.log(x2[0], x2[1]);
+
+    t1 = t2;
+    for (let i = 0; i < d; ++i) {
+      x1[i] = x2[i];
+    }
   }
 }
 
-void dx(float[] x, float[] dxt) {
-  dxt[0] = x[1];
-  dxt[1] = -x[0];
+function dx(t, xt, dxt) {
+  dxt[0] = xt[1];
+  dxt[1] = -xt[0];
 }
 ```
 
 実行結果は以下のようになります。
 
 ```
-1.0 -0.06283186
-0.99605215 -0.12566371
-0.98815644 -0.18824752
-0.9763285 -0.25033522
-0.9605995 -0.31167975
-0.9410161 -0.372036
-0.9176404 -0.4311618
-0.8905497 -0.48881882
-0.85983634 -0.5447737
-0.8256072 -0.5987988
-0.78798354 -0.6506733
-0.74710053 -0.70018375
+1 -0.06283185307179587
+0.9960521582395643 -0.12566370614359174
+0.9881564747186928 -0.1882475090019452
+0.976328534891951 -0.25033521143341386
+0.9605995096684699 -0.31167974248754665
+0.9410160938830372 -0.3720359897398751
+0.9176403832382812 -0.43116177468892936
+0.8905496899608517 -0.4888188204213035
+0.8598362976574118 -0.5447737076940571
+0.8256071560982013 -0.5987988156142645
+0.7879835168959605 -0.65067324314125
+0.7471005112851605 -0.7001837076978539
 
 …
 
@@ -208,79 +181,18 @@ void dx(float[] x, float[] dxt) {
 さらに、この結果をグラフで表すようにプログラムを変更します。
 Euler 法によって得られた数値解を赤色、解析解を青色の線で表します。
 
-プログラムの全体は以下のようになります。
+プログラムと実行結果は以下のようになります。
 
-```java
-float xLeft = 0;
-float xRight = 10 * PI;
-float yTop = 5;
-float yBottom = -5;
-
-void setup() {
-  size(600, 600);
-}
-
-void draw() {
-  background(255);
-
-  int steps = width;
-  int d = 2;
-  float[] x0 = {1, 0};
-  float[] x = new float[d];
-  float[] dxt = new float[d];
-  float t0 = 0;
-  float tTarget = xRight;
-  float dt = (tTarget - t0) / steps;
-  for (float t = t0 + dt; t < tTarget; t += dt) {
-    dx(x0, dxt);
-    for (int i = 0; i < d; ++i) {
-      x[i] = x0[i] + dt * dxt[i];
-      stroke(255, 0, 0);
-      drawLine(t - dt, x0[i], t, x[i]);
-      x0[i] = x[i];
-    }
-
-    stroke(0, 0, 255);
-    drawLine(t - dt, cos(t - dt), t, cos(t));
-    drawLine(t - dt, -sin(t - dt), t, -sin(t));
-  }
-}
-
-void dx(float[] x, float[] dxt) {
-  dxt[0] = x[1];
-  dxt[1] = -x[0];
-}
-
-float scaleX(float x) {
-  return width * (x - xLeft) / (xRight - xLeft);
-}
-
-float scaleY(float y) {
-  return height * (1 - (y - yBottom) / (yTop - yBottom));
-}
-
-void drawLine(float x0, float y0, float x1, float y1) {
-  line(scaleX(x0), scaleY(y0), scaleX(x1), scaleY(y1));
-}
-```
-
-実行結果は以下のようになります。
-
-![Screen Shot 2019-05-12 at 22.58.42.png (43.5 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/05/12/28750/83e4ae43-5e4e-4da6-861c-a8081c3f05c7.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="OJWdYBB" data-preview="true" data-editable="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2  3-1-2">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/OJWdYBB">
+  コンピューティング2  3-1-2</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 $$t$$ が進むにつれて、数値解と解析解のズレが大きくなっていくことが確認できます。
 
-変数 `steps` の値を変えて `dt` の値を変化させたときの結果を確認しておきましょう。
-
-`steps = 300` のときの結果は以下のようになります。
-
-![Screen Shot 2019-05-12 at 22.58.51.png (59.8 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/05/12/28750/2f987d9a-1e15-4753-ab96-47bdc2a8425a.png)
-
-`steps = 1200` のときの結果は以下のようになります。
-
-`dt` の値が大きければ（`steps` が小さければ）誤差は大きく、`dt` の値が小さければ（`steps` が大きければ）誤差が大きくなることが確認できます。
-
-![Screen Shot 2019-05-12 at 22.59.08.png (33.3 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/05/12/28750/abd3f04c-107e-449e-84d0-2d3a7e061d0b.png)
+変数 `steps` の値を変えて `h` の値を変化させたときの結果を確認してみましょう。 `h` の値が大きければ（`steps` が小さければ）誤差は大きく、`h` の値が小さければ（`steps` が大きければ）誤差が大きくなることが確認できます。
 
 # 2 階常微分方程式への Euler 法の適用
 
@@ -330,63 +242,11 @@ $$
 
 なお、これは前節の連立微分方程式と全く同じです。
 
-これを用いて $$x(t)$$ のグラフを表示するプログラムは以下の通りです。
+これを用いて $$x(t)$$ のグラフを表示するプログラムと実行結果は以下の通りです。
 
-```java
-float xLeft = 0;
-float xRight = 10 * PI;
-float yTop = 5;
-float yBottom = -5;
-
-void setup() {
-  size(600, 600);
-}
-
-void draw() {
-  background(255);
-
-  int steps = 1200;
-  int d = 2;
-  float[] x0 = {1, 0};
-  float[] x = new float[d];
-  float[] dxt = new float[d];
-  float t0 = 0;
-  float tTarget = xRight;
-  float dt = (tTarget - t0) / steps;
-  for (float t = t0 + dt; t < tTarget; t += dt) {
-    dx(x0, dxt);
-    for (int i = 0; i < d; ++i) {
-      x[i] = x0[i] + dt * dxt[i];
-      if (i == 0) {
-        stroke(255, 0, 0);
-        drawLine(t - dt, x0[i], t, x[i]);
-      }
-      x0[i] = x[i];
-    }
-
-    stroke(0, 0, 255);
-    drawLine(t - dt, cos(t - dt), t, cos(t));
-  }
-}
-
-void dx(float[] x, float[] dxt) {
-  dxt[0] = x[1];
-  dxt[1] = -x[0];
-}
-
-float scaleX(float x) {
-  return width * (x - xLeft) / (xRight - xLeft);
-}
-
-float scaleY(float y) {
-  return height * (1 - (y - yBottom) / (yTop - yBottom));
-}
-
-void drawLine(float x0, float y0, float x1, float y1) {
-  line(scaleX(x0), scaleY(y0), scaleX(x1), scaleY(y1));
-}
-```
-
-実行結果は以下のようになります。
-
-![Screen Shot 2019-05-12 at 23.03.28.png (32.1 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/05/12/28750/99a4ad4d-8ea7-46ed-a98c-7042ec2ecd54.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="oNBmROo" data-preview="true" data-editable="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2  3-1-3">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/oNBmROo">
+  コンピューティング2  3-1-3</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
