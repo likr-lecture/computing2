@@ -6,10 +6,10 @@ $$
 \frac{d}{dt} x(t) = f(t, x(t))
 $$
 
-ただし、$$x(t)$$ はテイラー展開可能であるとします。
+ただし、$$x(t)$$ は Taylor 展開可能であるとします。
 
 時刻 $$t_1$$ における関数値 $$x(t_1)$$ に対して、時間が $$h$$ 変化したときの関数値 $$x(t_1 + h)$$ について考えます。
-$$x(t)$$ の $$t_1$$ のまわりでのテイラー展開を第 2 項まで表すと次式になります。
+$$x(t)$$ の $$t_1$$ のまわりでの Taylor 展開を第 2 項まで表すと次式になります。
 
 $$
 x(t) = x(t_1) +  (t - t_1) x'(t_1)
@@ -52,7 +52,7 @@ function draw() {
 
   let t1 = t0;
   let x1 = 1;
-  for (let i = 0; i < steps; i += 1) {
+  for (let i = 0; i < steps; ++i) {
     const t2 = t1 + h;
     const x2 = x1 + h * dx(t1, x1);
     t1 = t2;
@@ -74,7 +74,7 @@ function dx(t, xt) {
 0.36787944117144233
 ```
 
-さらにこれを改変して、$$x(t)$$のグラフを$$0 \leq t \leq 1$$、$$0 \leq x \leq 1$$の範囲で幅 300、高さ 300 のウィンドウに描画するプログラムと実行結果は以下のようになります。
+さらにこれを改変して、$$x(t)$$のチャートを$$0 \leq t \leq 1$$、$$0 \leq x \leq 1$$の範囲で幅 300、高さ 300 のウィンドウに描画するプログラムと実行結果は以下のようになります。
 
 <p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="jOydozo" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2  3-1-1">
   <span>See the Pen <a href="https://codepen.io/likr/pen/jOydozo">
@@ -125,7 +125,7 @@ function setup() {
 }
 
 function draw() {
-  const steps = 300;
+  const steps = 100;
   const t0 = xLeft;
   const tTarget = xRight;
   const h = (tTarget - t0) / steps;
@@ -136,18 +136,18 @@ function draw() {
   const x2 = new Array(d);
   const dx1 = new Array(d);
 
-  for (let i = 0; i < steps; i += 1) {
+  for (let i = 0; i < steps; ++i) {
     const t2 = t1 + h;
     dx(t1, x1, dx1);
-    for (let i = 0; i < d; ++i) {
-      x2[i] = x1[i] + h * dx1[i];
+    for (let j = 0; j < d; ++j) {
+      x2[j] = x1[j] + h * dx1[j];
     }
 
     console.log(x2[0], x2[1]);
 
     t1 = t2;
-    for (let i = 0; i < d; ++i) {
-      x1[i] = x2[i];
+    for (let j = 0; j < d; ++j) {
+      x1[j] = x2[j];
     }
   }
 }
@@ -178,7 +178,7 @@ function dx(t, xt, dxt) {
 
 ```
 
-さらに、この結果をグラフで表すようにプログラムを変更します。
+さらに、この結果をチャートで表すようにプログラムを変更します。
 Euler 法によって得られた数値解を赤色、解析解を青色の線で表します。
 
 プログラムと実行結果は以下のようになります。
@@ -242,7 +242,7 @@ $$
 
 なお、これは前節の連立微分方程式と全く同じです。
 
-これを用いて $$x(t)$$ のグラフを表示するプログラムと実行結果は以下の通りです。
+これを用いて $$x(t)$$ のチャートを表示するプログラムと実行結果は以下の通りです。
 
 <p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="oNBmROo" data-preview="true" data-editable="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2  3-1-3">
   <span>See the Pen <a href="https://codepen.io/likr/pen/oNBmROo">
