@@ -25,7 +25,7 @@
   - [Euler 法](./docs/differential-equation/euler-method.md)
   - [Runge-Kutta 法](./docs/differential-equation/runge-kutta-method.md)
   - [微分方程式とアニメーションの描画](./docs/differential-equation/animation.md)
-  - [運動方程式の数値解法](./docs/equation-of-motion.md)
+  - [運動方程式の数値解法](./docs/differential-equation/equation-of-motion.md)
   - [流れ場と流線](./docs/differential-equation/vector-field.md)
   - [まとめ](./docs/differential-equation/summary.md)
   - [演習](./docs/differential-equation/exercise.md)

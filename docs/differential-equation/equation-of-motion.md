@@ -18,62 +18,9 @@ $$
 
 $$\theta$$ の時間変化をアニメーションで描画するプログラムは以下のようになります。
 
-```java
-float xLeft = 0;
-float xRight = 10;
-float yTop = 0;
-float yBottom = 10;
-
-float g = 9.8;
-float l = 300;
-
-int d = 2;
-float[] x0 = {PI / 4, 0};
-float[] x = new float[d];
-float[] tmp = new float[d];
-float[] f1 = new float[d];
-float[] f2 = new float[d];
-float[] f3 = new float[d];
-float[] f4 = new float[d];
-float t = 0;
-float dt = 0.1;
-
-void setup() {
-  size(600, 600);
-}
-
-void draw() {
-  background(255);
-
-  dx(x0, f1);
-  for (int i = 0; i < d; ++i) {
-    tmp[i] = x0[i] + dt * f1[i] / 2;
-  }
-  dx(tmp, f2);
-  for (int i = 0; i < d; ++i) {
-    tmp[i] = x0[i] + dt * f2[i] / 2;
-  }
-  dx(tmp, f3);
-  for (int i = 0; i < d; ++i) {
-    tmp[i] = x0[i] + dt * f3[i];
-  }
-  dx(tmp, f4);
-
-  for (int i = 0; i < d; ++i) {
-    x[i] = x0[i] + dt * (f1[i] + 2 * f2[i] + 2 * f3[i] + f4[i]) / 6;
-    x0[i] = x[i];
-  }
-
-  float cx = l * cos(x[0] + PI / 2) + width / 2;
-  float cy = l * sin(x[0] + PI / 2);
-  line(width / 2, 0, cx, cy);
-  ellipse(cx, cy, 100, 100);
-
-  t += dt;
-}
-
-void dx(float[] x, float[] dxt) {
-  dxt[0] = x[1];
-  dxt[1] = -g * sin(x[0]) / l;
-}
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="dyvoedY" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 3-4-1">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/dyvoedY">
+  コンピューティング2 3-4-1</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>

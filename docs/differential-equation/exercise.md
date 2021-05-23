@@ -115,7 +115,7 @@ y(0) &= 0
 \end{aligned}
 $$
 
-$$t = 0$$ から始まり、球の中心の x 座標を $$x(t)$$、y 座標を $$y(t)$$ とした時の球の運動のアニメーションを、$$-2 \leq x \leq 2$$、$$-2 \leq y \leq 2$$の範囲で幅 600、高さ 600 のウィンドウに描画しましょう。
+$$t = 0$$ から始まり、球の中心の x 座標を $$x(t)$$、y 座標を $$y(t)$$ とした時の球の運動のアニメーションを、$$-2 \leq x \leq 2$$、$$-2 \leq y \leq 2$$の範囲で幅 300、高さ 300 のウィンドウに描画しましょう。
 
 ## 演習 11
 
@@ -140,7 +140,7 @@ $$
 \end{aligned}
 $$
 
-以下の初期値が与えられたときの衛星の運動のアニメーションを、$$-0.5 \leq x \leq 3.5$$、$$-2 \leq y \leq 2$$の範囲で幅 600、高さ 600 のウィンドウに描画しましょう。
+以下の初期値が与えられたときの衛星の運動のアニメーションを、$$-0.5 \leq x \leq 3.5$$、$$-2 \leq y \leq 2$$の範囲で幅 300、高さ 300 のウィンドウに描画しましょう。
 
 $$
 \begin{aligned}
@@ -166,127 +166,121 @@ $$
 
 以下のプログラムの `vx` と `vy` の値を自由に決め、流線を描いてみましょう。
 
-```java
-float xLeft = 0;
-float xRight = 4.0;
-float yTop = 4.0;
-float yBottom = 0.0;
+```javascript
+const xLeft = 0;
+const xRight = 4;
+const yTop = 4;
+const yBottom = 0;
+let t1 = 0;
+const x1 = [2.5, 2.5];
 
-float[] vx = {
-  -2.0, -1.0, 0.0, 1.0, 2.0,
-  -2.0, -1.0, 0.0, 1.0, 2.0,
-  -2.0, -1.0, 0.0, 1.0, 2.0,
-  -2.0, -1.0, 0.0, 1.0, 2.0,
-  -2.0, -1.0, 0.0, 1.0, 2.0,
-};
-
-float[] vy = {
-  2.0, 2.0, 2.0, 2.0, 2.0,
-  1.0, 1.0, 1.0, 1.0, 1.0,
-  0.0, 0.0, 0.0, 0.0, 0.0,
-  -1.0, -1.0, -1.0, -1.0, -1.0,
-  -2.0, -2.0, -2.0, -2.0, -2.0,
-};
-
-float[] x0 = {2.5, 2.5};
-float t = 0;
-
-void setup() {
-  size(600, 600);
+function setup() {
+  createCanvas(300, 300);
   background(255);
-  drawVectorField();
+
+  applyTransform();
+  drawVectorField(20);
 }
 
-void draw() {
-  if (xLeft <= x0[0] && x0[0] < xRight && yBottom <= x0[1] && x0[1] < yTop) {
-    float h = 0.01;
-    int d = x0.length;
-    float[] x = new float[d];
-    float[] tmp = new float[d];
-    float[] k1 = new float[d];
-    float[] k2 = new float[d];
-    float[] k3 = new float[d];
-    float[] k4 = new float[d];
+function draw() {
+  if (x1[0] < xLeft || xRight < x1[0] || x1[1] < yBottom || yTop < x1[1]) {
+    return;
+  }
+  applyTransform();
 
-    dx(x0, k1);
-    for (int i = 0; i < d; ++i) {
-      tmp[i] = x0[i] + h * k1[i] / 2;
-    }
-    dx(tmp, k2);
-    for (int i = 0; i < d; ++i) {
-      tmp[i] = x0[i] + h * k2[i] / 2;
-    }
-    dx(tmp, k3);
-    for (int i = 0; i < d; ++i) {
-      tmp[i] = x0[i] + h * k3[i];
-    }
-    dx(tmp, k4);
+  const h = 0.1;
+  const d = x1.length;
+  const x2 = new Array(d);
+  const tmp = new Array(d);
+  const f1 = new Array(d);
+  const f2 = new Array(d);
+  const f3 = new Array(d);
+  const f4 = new Array(d);
 
-    for (int i = 0; i < d; ++i) {
-      x[i] = x0[i] + h * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) / 6;
-    }
-    stroke(0, 0, 255);
-    drawLine(x[0], x[1], x0[0], x0[1]);
-    for (int i = 0; i < d; ++i) {
-      x0[i] = x[i];
-    }
+  const t2 = t1 + h;
+  dx(t1, x1, f1);
+  for (let j = 0; j < d; ++j) {
+    tmp[j] = x1[j] + (h * f1[j]) / 2;
+  }
+  dx(t1, tmp, f2);
+  for (let j = 0; j < d; ++j) {
+    tmp[j] = x1[j] + (h * f2[j]) / 2;
+  }
+  dx(t1, tmp, f3);
+  for (let j = 0; j < d; ++j) {
+    tmp[j] = x1[j] + h * f3[j];
+  }
+  dx(t1, tmp, f4);
 
-    t += h;
+  for (let j = 0; j < d; ++j) {
+    x2[j] = x1[j] + (h * (f1[j] + 2 * f2[j] + 2 * f3[j] + f4[j])) / 6;
+  }
+
+  stroke(0, 0, 255);
+  line(x1[0], x1[1], x2[0], x2[1]);
+
+  t1 = t2;
+  for (let j = 0; j < d; ++j) {
+    x1[j] = x2[j];
   }
 }
 
-void dx(float[] x, float[] dxt) {
-  int i = constrain(int(x[1]), 0, 3);
-  int j = constrain(int(x[0]), 0, 3);
-  float vx1 = (x[0] - i) * vx[(i + 1) * 5 + j] - (x[0] - i - 1) * vx[i * 5 + j];
-  float vx2 = (x[0] - i) * vx[(i + 1) * 5 + (j + 1)] - (x[0] - i - 1) * vx[i * 5 + (j + 1)];
-  dxt[0] = (x[1] - j) * vx2 - (x[1] - j - 1) * vx1;
-  float vy1 = (x[0] - i) * vy[(i + 1) * 5 + j] - (x[0] - i - 1) * vy[i * 5 + j];
-  float vy2 = (x[0] - i) * vy[(i + 1) * 5 + (j + 1)] - (x[0] - i - 1) * vy[i * 5 + (j + 1)];
-  dxt[1] = (x[1] - j) * vy2 - (x[1] - j - 1) * vy1;
+function dx(t, xt, dxt) {
+  const vx = [
+    [-2.0, -1.0, 0.0, 1.0, 2.0],
+    [-2.0, -1.0, 0.0, 1.0, 2.0],
+    [-2.0, -1.0, 0.0, 1.0, 2.0],
+    [-2.0, -1.0, 0.0, 1.0, 2.0],
+    [-2.0, -1.0, 0.0, 1.0, 2.0],
+  ];
+  const vy = [
+    [2.0, 2.0, 2.0, 2.0, 2.0],
+    [1.0, 1.0, 1.0, 1.0, 1.0],
+    [0.0, 0.0, 0.0, 0.0, 0.0],
+    [-1.0, -1.0, -1.0, -1.0, -1.0],
+    [-2.0, -2.0, -2.0, -2.0, -2.0],
+  ];
+  const i = constrain(int(xt[1]), 0, 3);
+  const j = constrain(int(xt[0]), 0, 3);
+  const vx1 = (xt[0] - i) * vx[i + 1][j] - (xt[0] - (i + 1)) * vx[i][j];
+  const vx2 = (xt[0] - i) * vx[i + 1][j + 1] - (xt[0] - (i + 1)) * vx[i][j + 1];
+  dxt[0] = (xt[1] - j) * vx2 - (xt[1] - (j + 1)) * vx1;
+  const vy1 = (xt[0] - i) * vy[i + 1][j] - (xt[0] - (i + 1)) * vy[i][j];
+  const vy2 = (xt[0] - i) * vy[i + 1][j + 1] - (xt[0] - (i + 1)) * vy[i][j + 1];
+  dxt[1] = (xt[1] - j) * vy2 - (xt[1] - (j + 1)) * vy1;
 }
 
-float scaleX(float x) {
-  return width * (x - xLeft) / (xRight - xLeft);
+function applyTransform() {
+  resetMatrix();
+  scale(width / (xRight - xLeft), height / (yBottom - yTop));
+  translate(-xLeft, -yTop);
+  strokeWeight((xRight - xLeft) / width);
 }
 
-float scaleY(float y) {
-  return -height * (y - yBottom) / (yTop - yBottom) + height;
-}
-
-void drawLine(float x0, float y0, float x1, float y1) {
-  line(scaleX(x0), scaleY(y0), scaleX(x1), scaleY(y1));
-}
-
-void drawVectorField() {
-  float[] tmpX = new float[2];
-  float[] tmpDx = new float[2];
-  int steps = 20;
-  float xStep = (xRight - xLeft) / steps;
-  float yStep = (yTop - yBottom) / steps;
-  for (float x = xLeft; x <= xRight; x += xStep) {
-    for (float y = yBottom; y <= yTop; y += yStep) {
+function drawVectorField(steps) {
+  const tmpX = new Array(2);
+  const tmpDx = new Array(2);
+  const xStep = (xRight - xLeft) / steps;
+  const yStep = (yTop - yBottom) / steps;
+  for (let x = xLeft; x <= xRight; x += xStep) {
+    for (let y = yBottom; y <= yTop; y += yStep) {
       tmpX[0] = x;
       tmpX[1] = y;
-      dx(tmpX, tmpDx);
-      drawVector(tmpX, tmpDx);
+      dx(0, tmpX, tmpDx);
+      drawVector(tmpX[0], tmpX[1], tmpDx[0], tmpDx[1]);
     }
   }
 }
 
-void drawVector(float[] x, float[] dxt) {
-  float x1 = scaleX(x[0]);
-  float y1 = scaleY(x[1]);
-  float d = dist(0, 0, dxt[0], dxt[1]);
-  float theta = atan2(dxt[1], dxt[0]);
-  float x2 = d * cos(theta) + x1;
-  float y2 = -d * sin(theta) + y1;
+function drawVector(x, y, dx, dy) {
+  const d = dist(0, 0, dx, dy) / 50;
+  const theta = atan2(dy, dx);
   stroke(0);
-  line(x1, y1, x2, y2);
+  line(x, y, d * cos(theta) + x, d * sin(theta) + y);
 }
 
-void mouseClicked() {
-  x0[0] = (xRight - xLeft) * float(mouseX) / width + xLeft;
-  x0[1] = (yBottom - yTop) * float(mouseY) / height + yTop;
+function mouseClicked() {
+  x1[0] = ((xRight - xLeft) * float(mouseX)) / width + xLeft;
+  x1[1] = ((yBottom - yTop) * float(mouseY)) / height + yTop;
 }
 ```
