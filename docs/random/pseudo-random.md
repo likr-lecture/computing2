@@ -16,33 +16,31 @@ Processing の乱数関数 `random` について復習しましょう。
 2 つの引数で `random(low, high)` と呼び出された場合、 `random` 関数は `low` 以上 `high` 未満の実数値をランダムに返します。
 `random` 関数は一様乱数を返すため、`low`（または 0）と `high` の間の値が等確率で出現します。
 
+なお、JavaScript には 0 以上 1 未満の一様乱数を返す `Math.random` 関数もありますが、本資料では Processing の `random` 関数を使用します。
+
 例えば、確率 $$0 \leq p \leq 1$$ である処理を実行したい場合には、以下のようなプログラムを書くことができます。
 
-```java
-float p = 0.1;
-if (random(1) < p) {
-  // 10%の確率で実行する処理
+```javascript
+function setup() {
+  createCanvas(300, 300);
+  noLoop();
+}
+
+function draw() {
+  if (random(1) < 0.1) {
+    // 10%の確率で実行する処理
+  }
 }
 ```
 
 コインを投げたときに表が出る確率を 50%とし、10000 回コインを投げたときに表が出た回数を数えるプログラムは以下のようになります。
 
-```java
-int repeat = 10000;
-int count = 0;
-for (int i = 0; i < repeat; ++i) {
-  if (random(1) < 0.5) {
-    count += 1;
-  }
-}
-println(count + " / " + repeat);
-```
-
-実行結果は以下のようになります。
-
-```console
-4979 / 10000
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="poedZjQ" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-1">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/poedZjQ">
+  コンピューティング2 4-1</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 # 乱数の種
 
@@ -52,61 +50,63 @@ Processing での乱数種の設定は `randomSeed` 関数を用います。
 
 以下は乱数種を用いずに 5 個の実数値を表示するプログラムです。
 
-```java
-for (int i = 0; i < 5; ++i) {
-  println(random(1));
-}
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="XWMzBmL" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-2">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/XWMzBmL">
+  コンピューティング2 4-2</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-1 回目の実行結果は以下の通りです。
-
-```console
-0.901366
-0.9354197
-0.4483686
-0.34030527
-0.87377113
-```
-
-2 回目の実行結果は以下の通りです。
+1 回目の実行例は以下の通りです。
 
 ```console
-0.034834802
-0.20180964
-0.73463714
-0.8813292
-0.7115238
+0.4314729699929136
+0.49402074546951913
+0.051202191546919185
+0.08532266630981766
+0.6955639919548684
+```
+
+2 回目の実行例は以下の通りです。
+
+```console
+0.6484318172616956
+0.29618445984396824
+0.756902001756752
+0.771352089654068
+0.1431124359660807
 ```
 
 1 回目と 2 回目で実行結果が異なっていることが確認できます。
+もちろん、実行するたびに結果は異なります。
 
 以下のように `randomSeed` 関数で乱数の種を 0 に設定してみます。
 
-```java
-randomSeed(0);
-for (int i = 0; i < 5; ++i) {
-  println(random(1));
-}
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="QWpOByB" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-3">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/QWpOByB">
+  コンピューティング2 4-3</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 1 回目の実行結果は以下の通りです。
 
 ```console
-0.73096776
-0.831441
-0.24053639
-0.6063452
-0.6374174
+0.23606797284446657
+0.278566908556968
+0.8195337599609047
+0.6678668977692723
+0.3840773708652705
 ```
 
 2 回目の実行結果は以下の通りです。
 
 ```console
-0.73096776
-0.831441
-0.24053639
-0.6063452
-0.6374174
+0.23606797284446657
+0.278566908556968
+0.8195337599609047
+0.6678668977692723
+0.3840773708652705
 ```
 
 乱数種を同じにすることで 1 回目と 2 回目で同じ実行結果になりました。

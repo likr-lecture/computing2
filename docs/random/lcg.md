@@ -24,54 +24,12 @@ $$
 線形合同法による乱数生成プログラムの例は以下の通りです。
 パラメーターは $$a = 5, b = 3, m = 16$$ に設定されています。
 
-```java
-int seed = 1;
-
-int rand() {
-  int a = 5;
-  int b = 3;
-  int m = 16;
-  seed = (a * seed + b) % m;
-
-  return seed;
-}
-
-void setup() {
-  noLoop();
-}
-
-void draw() {
-  int repeat = 20;
-  for (int i = 0; i < repeat; ++i) {
-    println(rand());
-  }
-}
-```
-
-実行結果は以下のようになります。
-
-```console
-8
-11
-10
-5
-12
-15
-14
-9
-0
-3
-2
-13
-4
-7
-6
-1
-8
-11
-10
-5
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="LYWOBNG" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-4">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/LYWOBNG">
+  コンピューティング2 4-4</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 $$m=16$$であるため、0 以上 16 未満の整数値が順不同に出力されています。
 しかし、17 回目から 20 回目の出力結果が 1 回目から 4 回目の出力結果が一致していることに注目しましょう。
@@ -116,76 +74,23 @@ $$a, b, m$$ の選び方によっては、生成される値の種類が $$m$$ �
 線形合同法を用いた乱数列で、6 面ダイスを振ったときの出た目の分布をヒストグラムで描画します。
 パラメーターは $$a = 601, b=111, m=1024$$ としています。
 
-```java
-int seed = 1;
-
-float rand() {
-  int a = 601;
-  int b = 111;
-  int m = 1024;
-  seed = (a * seed + b) % m;
-
-  return float(seed) / m * 6 + 1;
-}
-
-int[] values;
-
-void setup() {
-  size(600, 600);
-  noLoop();
-
-  values = new int[10000];
-  for (int i = 0; i < values.length; ++i) {
-    values[i] = int(rand());
-  }
-}
-
-void draw() {
-  background(255);
-  int[] bins = createBins(values, 1, 6);
-  drawHistogram(bins);
-}
-
-int[] createBins(int[] values, int min, int max) {
-  int[] bins = new int[max - min + 1];
-  for (int i = 0; i < values.length; ++i) {
-    bins[values[i] - min] += 1;
-  }
-  return bins;
-}
-
-void drawHistogram(int[] bins) {
-  float binWidth = float(width) / bins.length;
-
-  int binMax = 0;
-  for (int i = 0; i < bins.length; ++i) {
-    if (bins[i] > binMax) {
-      binMax = bins[i];
-    }
-  }
-
-  fill(0, 0, 255);
-  for (int i = 0; i < bins.length; ++i) {
-    int binHeight = height * bins[i] / binMax;
-    rect(binWidth * i, height - binHeight, binWidth, binHeight);
-  }
-}
-```
-
-実行結果は以下のようになります。
-
-![Screen Shot 2019-06-10 at 10.17.22.png (13.0 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/06/10/28750/e2813b0e-fbc9-4c2a-9452-d3b8ec5b305f.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="rNyYreE" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-5">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/rNyYreE">
+  コンピューティング2 4-5</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 $$a = 607$$ に変更したときの結果は以下のようになります。
 
-![Screen Shot 2019-06-10 at 10.17.10.png (12.9 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/06/10/28750/fe5e5a22-5675-4f63-9c11-5f22c838f0d2.png)
+![fig1](./figs/fig1.png)
 
 3 と 6 の出た回数が目に見えて少なくなっています。
 パラメーターの設定の仕方によっては、このように正しく一様分布を生成することができません。
 
 さらに `seed` を 5 に変更したときの結果は以下のようになります。
 
-![Screen Shot 2019-06-10 at 10.17.39.png (13.0 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/06/10/28750/83e98430-8b95-4547-ad26-44fd19692618.png)
+![fig2](./figs/fig2.png)
 
 `seed` を変えても、分布は違うものの偏りが発生しています。
 
@@ -205,11 +110,10 @@ $$a = 607$$ に変更したときの結果は以下のようになります。
 
 線形合同法は 0 以上 $$m$$ 未満の整数を発生させます。
 線形合同法をプログラムで実装する場合には整数のオーバーフローに注意する必要があります。
-$$m$$ が 2 のべき乗の場合、符号無し整数ではオーバーフロー部分を無視することができます。
-しかし、Processing には符号無し整数がないため実装上の工夫を行う必要があります。
+$$m$$ が 2 のべき乗の場合、符号なし整数ではオーバーフロー部分を無視することができます。
 
-Processing の int 型は 32bit の符号付整数です。
-そして、Processing の int 型で表すことができる最大の値は 2147483647 です。
+JavaScript の数値を表す Number 型は IEEE 754 形式の 64 ビット浮動小数点数であるため、符号なし整数と同じ処理をプログラムで再現してみます。
+そして、32 ビット の 符号あり整数型で表すことができる最大の値は 2147483647 です。
 $$m = 2147483647$$ のとき、0 以上 2147483646 以下の整数値が生成されます。
 $$b = 0$$ の場合の乱数生成について考えてみましょう。
 
@@ -246,33 +150,9 @@ $$
 
 $$a = 48271$$ の場合のプログラムは以下のようになります。
 
-```java
-int seed = 1;
-
-float rand() {
-  int a = 48271;
-  int m = 2147483647;
-  int q = m / a;
-  int r = m % a;
-  int hi = seed / q;
-  int lo = seed % q;
-  int test = a * lo - r * hi;
-  if (test > 0) {
-    seed = test;
-  } else {
-    seed = test + m;
-  }
-  return float(seed) / m;
-}
-
-void setup() {
-  noLoop();
-}
-
-void draw() {
-  int repeat = 10;
-  for (int i = 0; i < repeat; ++i) {
-    println(rand());
-  }
-}
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="JjWOBbY" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-6">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/JjWOBbY">
+  コンピューティング2 4-6</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
