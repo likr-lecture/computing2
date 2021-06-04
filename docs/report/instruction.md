@@ -17,6 +17,7 @@
 - 付録
 
 作成したプログラムも同時に提出してください。
+プログラムは p5.js、Processing for Java、Processing for Python のいずれかを使用して作成してください。
 
 レポートの作成手段（Word、LaTeX 等）は問いませんが、PDF 形式で提出してください。
 

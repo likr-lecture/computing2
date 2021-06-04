@@ -24,9 +24,9 @@ $$
 線形合同法による乱数生成プログラムの例は以下の通りです。
 パラメーターは $$a = 5, b = 3, m = 16$$ に設定されています。
 
-<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="LYWOBNG" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-4">
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="LYWOBNG" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-7">
   <span>See the Pen <a href="https://codepen.io/likr/pen/LYWOBNG">
-  コンピューティング2 4-4</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  コンピューティング2 4-7</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
@@ -74,9 +74,9 @@ $$a, b, m$$ の選び方によっては、生成される値の種類が $$m$$ �
 線形合同法を用いた乱数列で、6 面ダイスを振ったときの出た目の分布をヒストグラムで描画します。
 パラメーターは $$a = 601, b=111, m=1024$$ としています。
 
-<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="rNyYreE" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-5">
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="rNyYreE" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-8">
   <span>See the Pen <a href="https://codepen.io/likr/pen/rNyYreE">
-  コンピューティング2 4-5</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  コンピューティング2 4-8</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
@@ -150,9 +150,9 @@ $$
 
 $$a = 48271$$ の場合のプログラムは以下のようになります。
 
-<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="JjWOBbY" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-6">
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="JjWOBbY" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-9">
   <span>See the Pen <a href="https://codepen.io/likr/pen/JjWOBbY">
-  コンピューティング2 4-6</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  コンピューティング2 4-9</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>

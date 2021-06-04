@@ -21,80 +21,21 @@ Processing では、`randomGaussian()` 関数によって標準正規分布に�
 
 以下は Processing で標準正規分布に従う値を 10 個コンソールに表示するプログラムです。
 
-```java
-for (int i = 0; i < 10; ++i) {
-  println(randomGaussian());
-}
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="BaWrgyo" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-10">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/BaWrgyo">
+  コンピューティング2 4-10</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-出力結果は以下のようになります。
+さらに、標準正規分布のヒストグラムを描画するプログラムは以下の通りです。
 
-```console
-1.0645853
--0.121457554
--2.4501405
-0.3811973
-1.0769348
--2.1460996
-0.073974945
-0.5043901
--3.0981495
--0.6422674
-```
-
-標準正規分布のヒストグラムを描画するプログラムは以下の通りです。
-
-```java
-float[] values;
-
-void setup() {
-  size(600, 600);
-  noLoop();
-
-  values = new float[10000];
-  for (int i = 0; i < values.length; ++i) {
-    values[i] = randomGaussian() ;
-  }
-}
-
-void draw() {
-  background(255);
-  int[] bins = createBins(values, -10, 10, 50);
-  drawHistogram(bins);
-}
-
-int[] createBins(float[] values, float min, float max, int numBins) {
-  int[] bins = new int[numBins];
-  for (int i = 0; i < values.length; ++i) {
-    int j = int((values[i] - min) * numBins / (max - min));
-    if (0 <= j && j < numBins) {
-      bins[j] += 1;
-    }
-  }
-  return bins;
-}
-
-void drawHistogram(int[] bins) {
-  float binWidth = float(width) / bins.length;
-
-  int binMax = 0;
-  for (int i = 0; i < bins.length; ++i) {
-    if (bins[i] > binMax) {
-      binMax = bins[i];
-    }
-  }
-
-  fill(0, 0, 255);
-  for (int i = 0; i < bins.length; ++i) {
-    int binHeight = height * bins[i] / binMax;
-    rect(binWidth * i, height - binHeight, binWidth, binHeight);
-  }
-}
-```
-
-実行結果は以下のようになります。
-
-![Screen Shot 2019-06-17 at 9.10.44.png (14.3 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/06/17/28750/b8afabcf-2203-4120-9472-33d27b3f60a8.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="QWpmXjd" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-11">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/QWpmXjd">
+  コンピューティング2 4-11</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 # 逆関数法
 
@@ -127,57 +68,12 @@ $$
 
 逆関数法で $$U(0, 1)$$ から $$U(-10, 10)$$ に従った乱数を生成し、ヒストグラムを描画するプログラムは以下のようになります。
 
-```java
-float[] values;
-
-void setup() {
-  size(600, 600);
-  noLoop();
-
-  values = new float[10000];
-  for (int i = 0; i < values.length; ++i) {
-    values[i] = 20 * random(0, 1) -10;
-  }
-}
-
-void draw() {
-  background(255);
-  int[] bins = createBins(values, -10, 10, 20);
-  drawHistogram(bins);
-}
-
-int[] createBins(float[] values, float min, float max, int numBins) {
-  int[] bins = new int[numBins];
-  for (int i = 0; i < values.length; ++i) {
-    int j = int((values[i] - min) * numBins / (max - min));
-    if (0 <= j && j < numBins) {
-      bins[j] += 1;
-    }
-  }
-  return bins;
-}
-
-void drawHistogram(int[] bins) {
-  float binWidth = float(width) / bins.length;
-
-  int binMax = 0;
-  for (int i = 0; i < bins.length; ++i) {
-    if (bins[i] > binMax) {
-      binMax = bins[i];
-    }
-  }
-
-  fill(0, 0, 255);
-  for (int i = 0; i < bins.length; ++i) {
-    int binHeight = height * bins[i] / binMax;
-    rect(binWidth * i, height - binHeight, binWidth, binHeight);
-  }
-}
-```
-
-実行結果は以下のようになります。
-
-![Screen Shot 2019-06-17 at 9.20.39.png (13.6 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/06/17/28750/d866fa79-6f8c-4df8-a034-93492c754fe8.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="zYZWVrj" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-12">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/zYZWVrj">
+  コンピューティング2 4-12</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 ## 指数分布に従った乱数の生成
 
@@ -197,40 +93,14 @@ $$
 F^{-1}(x) = - \frac{\log(1 - x)}{\lambda}
 $$
 
-逆関数法によって指数分布に従う乱数を生成するプログラムは以下のようになります。
+逆関数法によって指数分布に従う乱数を生成し、ヒストグラムを描画するプログラムは以下のようになります。
 
-```java
-void setup() {
-  noLoop();
-}
-
-void draw() {
-  background(255);
-  for (int i = 0; i < 10; ++i) {
-    println(randomExponential(2));
-  }
-}
-
-float randomExponential(float lambda) {
-  float x = random(0, 1);
-  return -log(1 - x) / lambda;
-}
-```
-
-実行結果は以下のようになります。
-
-```console
-0.8439477
-0.08957177
-0.4351533
-0.050842267
-0.16265357
-0.7450313
-0.27376103
-0.8175968
-0.96898216
-1.5987735
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="QWpmXNd" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-12">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/QWpmXNd">
+  コンピューティング2 4-12</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 # 正規分布に従った乱数の生成
 
@@ -244,41 +114,14 @@ $$
 すなわち、逆関数法によって $$R$$ と $$\Theta$$ が得られれば標準正規分布を得ることができます。
 この方法は **Box-Muller 法** と呼ばれています。
 
-以下は Box-Muller 法によって $$N(0, 1)$$ に従う乱数を 10 個コンソールに表示するプログラムです。
+以下は Box-Muller 法によって $$N(0, 1)$$ に従う乱数のヒストグラムを描画するプログラムです。
 
-```java
-void setup() {
-  noLoop();
-}
-
-void draw() {
-  background(255);
-  for (int i = 0; i < 10; ++i) {
-    println(gaussian());
-  }
-}
-
-float gaussian() {
-  float x = random(0, 1);
-  float y = random(0, 1);
-  return sqrt(-2 * log(x)) * cos(TWO_PI * y);
-}
-```
-
-実行結果は以下のようになります。
-
-```console
--0.4542584
--0.85491806
--0.825849
-0.22304444
-0.06334269
-2.0772574
-0.026376083
-0.23405305
--1.9164213
-0.07818792
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="KKWojgq" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-13">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/KKWojgq">
+  コンピューティング2 4-13</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 # Poisson 分布に従った乱数の生成
 
@@ -291,65 +134,12 @@ Poisson 分布 $$Po(\lambda)$$ に従った乱数は、指数分布 $$\text{Exp}
 Poisson 分布のヒストグラムを描画するプログラムは以下のようになります。
 Poisson 分布は離散的な確率分布であることに注意しましょう。
 
-```java
-int[] values;
-
-void setup() {
-  size(600, 600);
-  noLoop();
-
-  values = new int[10000];
-  for (int i = 0; i < values.length; ++i) {
-    values[i] = poisson(2);
-  }
-}
-
-void draw() {
-  background(255);
-  int[] bins = createBins(values, 0, 10);
-  drawHistogram(bins);
-}
-
-int poisson(float lambda) {
-  float xp;
-  int k = 0;
-  xp = random(0, 1);
-  while (xp >= exp(-lambda)) {
-    xp = xp * random(0, 1);
-    k = k + 1;
-  }
-  return (k);
-}
-
-int[] createBins(int[] values, int min, int max) {
-  int[] bins = new int[max - min + 1];
-  for (int i = 0; i < values.length; ++i) {
-    bins[values[i] - min] += 1;
-  }
-  return bins;
-}
-
-void drawHistogram(int[] bins) {
-  float binWidth = float(width) / bins.length;
-
-  int binMax = 0;
-  for (int i = 0; i < bins.length; ++i) {
-    if (bins[i] > binMax) {
-      binMax = bins[i];
-    }
-  }
-
-  fill(0, 0, 255);
-  for (int i = 0; i < bins.length; ++i) {
-    int binHeight = height * bins[i] / binMax;
-    rect(binWidth * i, height - binHeight, binWidth, binHeight);
-  }
-}
-```
-
-実行結果は以下のようになります。
-
-![Screen Shot 2019-06-17 at 2.48.28.png (13.5 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/06/17/28750/49516503-4dc5-4574-9846-ebfc812892ad.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="LYWdKba" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-14">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/LYWdKba">
+  コンピューティング2 4-14</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 # 待ち行列のシミュレーション
 
@@ -364,57 +154,11 @@ $$\lambda = 3, \mu = 5$$ としたときの、平均待ち時間（顧客が列�
 `arrived[i]` は `i` 番目の顧客が到着した時刻、`serviceTime[i]` は `i` 番目の顧客のサービスにかかった時間、`finished[i]` は `i` 番目の顧客がサービスを受け終わった時刻を表しています。
 平均待ち時間は `finished[i] - arrived[i]` の平均値となります。
 
-```java
-void setup() {
-  noLoop();
-}
-
-void draw() {
-  int n = 100000;
-  float[] arrived = new float[n];
-  float[] serviceTime = new float[n];
-
-  float lambda = 3;
-  arrived[0] = randomExponential(lambda);
-  for (int i = 1; i < n; ++i) {
-    arrived[i] = arrived[i - 1] + randomExponential(lambda);
-  }
-
-  float mu = 5;
-  for (int i = 0; i < n; ++i) {
-    serviceTime[i] = randomExponential(mu);
-  }
-
-  float[] finished = new float[n];
-  finished[0] = arrived[0] + serviceTime[0];
-  for (int i = 1; i < n; ++i) {
-    float started;
-    if (arrived[i] > finished[i - 1]) {
-      started = arrived[i];
-    } else {
-      started = finished[i - 1];
-    }
-    finished[i] = started + serviceTime[i];
-  }
-
-  float waitTime = 0;
-  for (int i = 0; i < n; ++i) {
-    waitTime += finished[i] - arrived[i];
-  }
-  waitTime /= n;
-  println(waitTime);
-}
-
-float randomExponential(float lambda) {
-  float x = random(0, 1);
-  return -log(1 - x) / lambda;
-}
-```
-
-実行結果は以下のようになります。
-
-```console
-0.4989177
-```
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-user="likr" data-slug-hash="GRWxbWJ" data-preview="true" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="コンピューティング2 4-15">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/GRWxbWJ">
+  コンピューティング2 4-15</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 M/M/1 モデルの場合は解析解が知られており、それは $$\frac{1}{\mu - \lambda} = \frac{1}{2}$$ であるため、大体一致していることが確認できます。
