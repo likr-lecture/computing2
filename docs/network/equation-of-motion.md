@@ -3,37 +3,13 @@
 まず最初の例として、加速度が常に 0 であるとき、すなわち等速直線運動について考えます。
 Verlet 法の更新式に基づいて Processing のプログラムを作成します。
 
-```java
-float x;
-float y;
-float vx;
-float vy;
-float r = 25;
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-slug-hash="ZEKzjEd" data-preview="true" data-user="likr" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/ZEKzjEd">
+  コンピューティング2 5-1</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-void setup() {
-  size(600, 600);
-  x = r;
-  y = height / 2;
-  vx = 1;
-  vy = 0;
-}
-
-void draw() {
-  background(255);
-  fill(0);
-  ellipse(x, y, 2 * r, 2 * r);
-
-  x += vx;
-  y += vy;
-  vx += 0;
-  vy += 0;
-}
-```
-
-実行結果は以下のようになります。
-（以降では、アニメーションの様子をわかりやすくするために軌跡が残るようにプログラムを改変しています。）
-
-![Screen Shot 2019-07-01 at 12.13.16.png (16.0 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/07/01/28750/19244357-24da-4c4c-ac35-a4bab9ef23c9.png)
 
 # 放物運動
 
@@ -46,69 +22,22 @@ void draw() {
 
 Processing でのプログラムは以下のようになります。
 
-```java
-float x;
-float y;
-float vx;
-float vy;
-float r = 25;
-
-void setup() {
-  size(600, 600);
-  x = width / 2;
-  y = height - r;
-  vx = 0;
-  vy = -10;
-}
-
-void draw() {
-  background(255);
-  fill(0);
-  ellipse(x, y, 2 * r, 2 * r);
-
-  x += vx;
-  y += vy;
-  vx += 0;
-  vy += 0.1;
-}
-```
-
-実行結果は以下のようになります。
-
-![Screen Shot 2019-07-01 at 12.14.42.png (42.9 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/07/01/28750/8efb1c1c-2c21-4139-a6c7-ca9dd78af28f.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-slug-hash="BaRBPNV" data-preview="true" data-user="likr" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/BaRBPNV">
+  コンピューティング2 5-1</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 さらに、横方向の初速度を加え、投射運動をシミュレーションしてみます。
 
-```java
-float x;
-float y;
-float vx;
-float vy;
-float r = 25;
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-slug-hash="vYmBaLJ" data-preview="true" data-user="likr" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/vYmBaLJ">
+  コンピューティング2 5-2</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-void setup() {
-  size(600, 600);
-  x = r;
-  y = height - r;
-  vx = 2.5;
-  vy = -10;
-}
-
-void draw() {
-  background(255);
-  fill(0);
-  ellipse(x, y, 2 * r, 2 * r);
-
-  x += vx;
-  y += vy;
-  vx += 0;
-  vy += 0.1;
-}
-```
-
-実行結果は以下のようになります。
-
-![Screen Shot 2019-07-01 at 12.11.08.png (76.3 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/07/01/28750/55256e10-e0ed-4030-b88c-ed010d581e89.png)
 
 # 壁への衝突
 
@@ -117,109 +46,22 @@ void draw() {
 
 プログラムにすると以下のようになります。
 
-```java
-float x;
-float y;
-float vx;
-float vy;
-float r = 25;
-boolean boundX = false;
-boolean boundY = false;
-
-void setup() {
-  size(600, 600);
-  x = width / 2;
-  y = height - r;
-  vx = 25;
-  vy = -30;
-}
-
-void draw() {
-  background(255);
-  fill(0);
-  ellipse(x, y, 2 * r, 2 * r);
-
-  x += vx;
-  y += vy;
-
-  if (x - r < 0 || width < x + r) {
-    if (!boundX) {
-      vx *= -1;
-      boundX = true;
-    }
-  } else {
-    boundX = false;
-  }
-
-  if (y + r > height) {
-    if (!boundY) {
-      vy *= -1;
-      boundY = true;
-    }
-  } else {
-    boundY = false;
-    vy += 1;
-  }
-}
-```
-
-実行結果は以下のようになります。
-
-![Screen Shot 2019-07-01 at 12.31.52.png (78.7 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/07/01/28750/952bfe0c-b1a3-487e-ba68-b50aa1299c86.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-slug-hash="qBmWyep" data-preview="true" data-user="likr" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/qBmWyep">
+  コンピューティング2 5-3</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 上のプログラムでは、壁への衝突によって減速が起こりませんでした。
 衝突の度に減速の効果を加えると以下のようになります。
 
-```java
-float x;
-float y;
-float vx;
-float vy;
-float r = 25;
-boolean boundX = false;
-boolean boundY = false;
-float restitution = 0.9;
-
-void setup() {
-  size(600, 600);
-  x = width / 2;
-  y = height - r;
-  vx = 25;
-  vy = -30;
-}
-
-void draw() {
-  background(255);
-  fill(0);
-  ellipse(x, y, 2 * r, 2 * r);
-
-  x += vx;
-  y += vy;
-
-  if (x - r < 0 || width < x + r) {
-    if (!boundX) {
-      vx *= -restitution;
-      boundX = true;
-    }
-  } else {
-    boundX = false;
-  }
-
-  if (y + r > height) {
-    if (!boundY) {
-      vy *= -restitution;
-      boundY = true;
-    }
-  } else {
-    boundY = false;
-    vy += 1;
-  }
-}
-```
-
-実行結果は以下のようになります。
-
-![Screen Shot 2019-07-01 at 12.28.33.png (130.3 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/07/01/28750/63f473e7-8c92-43b2-b7f7-a78be82e9f10.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-slug-hash="OJmLwKG" data-preview="true" data-user="likr" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/OJmLwKG">
+  コンピューティング2 5-4</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 # 力の加算
 
@@ -238,38 +80,12 @@ $$
 物体の運動をシミュレーションする際には、$$F_1$$ と $$F_2$$ による加速度をそれぞれ別で計算して足し合わせることができます。
 プログラムにすると以下のようになります。
 
-```java
-float x;
-float y;
-float vx;
-float vy;
-float r = 25;
-
-void setup() {
-  size(600, 600);
-  x = width / 2;
-  y = r;
-  vx = 0;
-  vy = 100;
-}
-
-void draw() {
-  background(255);
-  fill(0);
-  ellipse(x, y, 2 * r, 2 * r);
-
-  x += vx;
-  y += vy;
-
-  vx += 0;
-  vy += 1;
-  vy += -0.25 * vy;
-}
-```
-
-実行結果は以下のようになります。
-
-![Screen Shot 2019-07-01 at 12.32.59.png (28.1 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/07/01/28750/c7d97fca-c5f9-4c47-bfe0-2e4c5c52c690.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-slug-hash="bGWbxGb" data-preview="true" data-user="likr" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/bGWbxGb">
+  コンピューティング2 5-5</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 # Verlet 法プログラムの整理
 
@@ -283,89 +99,12 @@ Verlet 法のプログラムは以下の部分から構成されています。
 より複雑なシミュレーションを行うため、プログラムを関数化して整理します。
 
 以下のプログラムは、重力、壁の反射、空気抵抗を考慮した球体の運動を関数化して整理したプログラムです。
-`drawObjects` 関数の引数で軌跡の表示の有無を切り替えられるようにしています。
 
-```java
-float x;
-float y;
-float vx;
-float vy;
-float r = 25;
-boolean boundX = false;
-boolean boundY = false;
-
-void setup() {
-  size(600, 600);
-  background(255);
-  x = width / 2;
-  y = height - r;
-  vx = 30;
-  vy = -30;
-}
-
-void draw() {
-  drawObjects(true);
-  updatePosition();
-  updateVelocity();
-}
-
-void drawObjects(boolean showMotion) {
-  float alpha;
-  if (!showMotion) {
-    background(255);
-    alpha = 255;
-  } else {
-    alpha = 50;
-  }
-  noStroke();
-  fill(0, alpha);
-  ellipse(x, y, 2 * r, 2 * r);
-}
-
-void updatePosition() {
-  x += vx;
-  y += vy;
-}
-
-void updateVelocity() {
-  applyReflection(0.99);
-  applyGravityForce(1);
-  applyResistanceForce(0.01);
-}
-
-void applyReflection(float restitution) {
-  if (x - r < 0 || width < x + r) {
-    if (!boundX) {
-      vx *= -restitution;
-      boundX = true;
-    }
-  } else {
-    boundX = false;
-  }
-  if (y + r > height) {
-    if (!boundY) {
-      vy *= -restitution;
-      boundY = true;
-    }
-  } else {
-    boundY = false;
-  }
-}
-
-void applyGravityForce(float g) {
-  if (!boundY) {
-    vy += g;
-  }
-}
-
-void applyResistanceForce(float k) {
-  vx += -k * vx;
-  vy += -k * vy;
-}
-```
-
-実行結果は以下のようになります。
-
-![Screen Shot 2019-07-08 at 6.09.15.png (120.0 kB)](https://img.esa.io/uploads/production/attachments/8704/2019/07/08/28750/346ac6fa-e08f-47f7-be7b-ad199a20622f.png)
+<p class="codepen" data-height="500" data-theme-id="light" data-default-tab="js,result" data-slug-hash="JjNPaoM" data-preview="true" data-user="likr" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/JjNPaoM">
+  コンピューティング2 5-6</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 以降はこのプログラムをベースにしてシミュレーションを行います。

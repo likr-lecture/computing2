@@ -1,5 +1,12 @@
 ## 演習 1
 
+<p class="codepen" data-height="300" data-theme-id="light" data-default-tab="js,result" data-slug-hash="NWjKEgo" data-preview="true" data-user="likr" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/NWjKEgo">
+  コンピューティング2 5-8</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
 上記のプログラムにおいて、衛星の初速 `vx`, `vy` や初期距離 `d0` を変更した時の衛星の軌道を観察しましょう。
 
 ## 演習 2
@@ -9,6 +16,13 @@
 例）単振り子運動
 
 ## 演習 3
+
+<p class="codepen" data-height="300" data-theme-id="light" data-default-tab="js,result" data-slug-hash="JjNPaoM" data-preview="true" data-editable="true" data-user="likr" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/likr/pen/JjNPaoM">
+  コンピューティング2 5-7</a> by Yosuke Onoue (<a href="https://codepen.io/likr">@likr</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 上記のプログラムを改変し、3 つの球体が同時に運動するプログラムを作成しましょう。
 色相の異なる 3 つの色をそれぞれの球体に割り当てるようにしましょう。
